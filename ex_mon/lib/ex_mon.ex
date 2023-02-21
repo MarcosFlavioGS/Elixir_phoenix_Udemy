@@ -13,11 +13,19 @@ defmodule ExMon do
     |> Game.start(player)
 
     Status.print_round_message()
-    IO.inspect(Game.info())
-    IO.puts "-------------------"
   end
 
   def make_move(move) do
-    Actions.fetch_move(move)
+    move
+    |> Actions.fetch_move()
+    |> do_move()
+  end
+
+  defp do_move({:error, move}), do: Status.wrong_move_message(move)
+  defp do_move({:ok, move}) do
+    case move do
+      :move_heal -> "Realizar cura"
+      move -> Actions.attack(move)
+    end
   end
 end
