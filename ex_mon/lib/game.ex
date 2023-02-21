@@ -13,4 +13,6 @@ defmodule ExMon.Game do
     Agent.get(__MODULE__, & &1) # Getting current value of the agent
   end
 
+  def get_player, do: Map.get(info(), :player)
+
 end
