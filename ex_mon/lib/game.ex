@@ -13,6 +13,10 @@ defmodule ExMon.Game do
     Agent.get(__MODULE__, & &1) # Getting current value of the agent
   end
 
+  def update(state) do
+    Agent.update(__MODULE__, fn _ -> state end) # Receive a state, then substitute state
+  end
+
   def get_player, do: Map.get(info(), :player)
   def turn, do: Map.get(info(), :turn)
   def fetch_player(player), do: Map.get(info(), player)
